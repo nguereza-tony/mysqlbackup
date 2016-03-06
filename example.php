@@ -20,7 +20,7 @@ $obj->backup();
 
 //ou le paramètre database si vous êtes en local
 
-$obj = new MysqlBackup(array('database' => 'MY_LOCAL_DATABASE'));
+$obj = new MysqlBackup(array('database' => 'election'));
 
 //activez ou desactivez le debug par defaut le debug est activé
 

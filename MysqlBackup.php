@@ -74,7 +74,7 @@ class MysqlBackup{
 		}
 		$content = "-- ---------------------------------------------------------------\n";
 		$content .= "-- -------- Sauvegarde de la base de donnees ".$database." ------------\n";
-		$content .= "-- -------- Date ".date('d/m/Y h:i')." ------------\n";
+		$content .= "-- -------- Date ".date('d/m/Y H:i')." ------------\n";
 		$content .= "-- -------- Auteur Tony NGUEREZA ------------\n";
 		$content .= "-- ---------------------------------------------------------------\n\n";
 		
@@ -123,6 +123,7 @@ class MysqlBackup{
 			if($this->debug){
 				echo "<br />***************** FIN DE LA SAUVEGARDE DE LA BASE DE DONNEES $database **************************<br /><br />";
 			}
+			echo "file saved at <a href = '$path'>$path</a>";
 		}
 		else{
 			self::errorLog("Erreur lors de la sauvegarde");
