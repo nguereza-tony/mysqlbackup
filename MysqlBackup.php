@@ -35,9 +35,7 @@ class MysqlBackup{
 		if(isset($config['path'])){
 			$this->setPath($config['path']);
 		}
-		else{
-			$this->setPath('./');
-		}
+	
 		
 		if(isset($config['debug'])){
 			$this->debug($config['debug']);
@@ -64,8 +62,7 @@ class MysqlBackup{
 			self::errorLog('Vous devez préciser une base de données avant d\'effectuer une sauvegarde.');
 		}
 		$filename = 'backup_'.$this->getDatabase().'.sql';
-		$path = rtrim($this->getPath(),'/');
-		$path = $path.'/'.$filename;
+		$path = $this->getPath().$filename;
 		$fp = fopen($path, 'w+');
 		$database = $this->getDatabase();
 		
@@ -74,7 +71,7 @@ class MysqlBackup{
 		}
 		$content = "-- ---------------------------------------------------------------\n";
 		$content .= "-- -------- Sauvegarde de la base de donnees ".$database." ------------\n";
-		$content .= "-- -------- Date ".date('d/m/Y H:i')." ------------\n";
+		$content .= "-- -------- Date ".date('d/m/Y h:i')." ------------\n";
 		$content .= "-- -------- Auteur Tony NGUEREZA ------------\n";
 		$content .= "-- ---------------------------------------------------------------\n\n";
 		
@@ -123,7 +120,7 @@ class MysqlBackup{
 			if($this->debug){
 				echo "<br />***************** FIN DE LA SAUVEGARDE DE LA BASE DE DONNEES $database **************************<br /><br />";
 			}
-			echo "file saved at <a href = '$path'>$path</a>";
+			echo "<p>Fichier sauvegarder cliquez sur le lien pour le telecharger <a href = '$path'>$path</a></p>";
 		}
 		else{
 			self::errorLog("Erreur lors de la sauvegarde");
@@ -176,7 +173,7 @@ class MysqlBackup{
 	} 
 	
 	public function setDatabase($database){
-		$this->database = strtolower($database);
+		$this->database = $database;
 		if(!@mysql_select_db($this->getDatabase(), $this->link)){
 			self::errorLog('Impossible de selectionner la base de données : '.mysql_error());
 		}
