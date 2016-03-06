@@ -175,7 +175,7 @@ class MysqlBackup{
 	} 
 	
 	public function setDatabase($database){
-		$this->database = strtolower($database);
+		$this->database = $database;
 		if(!@mysql_select_db($this->getDatabase(), $this->link)){
 			self::errorLog('Impossible de selectionner la base de données : '.mysql_error());
 		}
